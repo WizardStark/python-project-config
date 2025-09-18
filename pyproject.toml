@@ -1,0 +1,69 @@
+[build-system]
+build-backend = "hatchling.build"
+
+requires = [ "hatchling" ]
+
+[project]
+name = "<project_package_name>"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [ "Programming Language :: Python :: 3 :: Only", "Programming Language :: Python :: 3.13" ]
+dependencies = [  ]
+
+urls.repository = ""
+
+[dependency-groups]
+dev = [
+  "debugpy>=1.8.14",
+  "mypy>=1.16.1",
+  "pre-commit>=4.2",
+  "py-spy>=0.4.1",
+  "pytest>=8.4.1",
+  "pytest-cov>=7",
+  "pytest-profiling>=1.8.1",
+  "ruff>=0.12",
+  "types-python-dateutil>=2.9.0.20250708",
+  "types-requests>=2.32.4.20250611",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [ "src/<project_package_name>" ]
+
+[tool.ruff]
+format.quote-style = "double"
+format.docstring-code-format = true
+# See https://docs.astral.sh/ruff/rules/ for linting codes.
+lint.select = [ "A", "B", "C4", "D", "E4", "E7", "E9", "F", "FURB", "PT", "SIM", "T20", "TRY", "UP" ]
+# Disable requiring documentation for every parameter
+lint.ignore = [ "D417" ]
+# Only enforce docstring and exception formatting rules in the src directory
+lint.per-file-ignores."!src/**.py" = [ "D" ]
+# Enforce logger use over print statements only in src/ and test/
+lint.per-file-ignores."!{src,test}/**.py" = [ "T20" ]
+# Disable docstring requirements in __init__.py
+lint.per-file-ignores."__init__.py" = [ "D" ]
+# Mark flake8-bugbear errors as unfixable
+lint.unfixable = [ "B" ]
+lint.pydocstyle.convention = "numpy"
+
+[tool.pytest.ini_options]
+pythonpath = [ ".", "src" ]
+testpaths = [ "test" ]
+addopts = "--cov=<project_package_name>"
+
+[tool.coverage.run]
+omit = [ 'test' ]
+
+[tool.mypy]
+python_version = "3.13"
+show_traceback = true
+disable_error_code = "import-untyped"
+# plugins = [ "sqlalchemy.ext.mypy.plugin" ]
+
+[tool.uv]
+required-environments = [
+  "sys_platform == 'darwin' and platform_machine == 'arm64'",
+]
+default-groups = [ "dev" ]
