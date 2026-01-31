@@ -17,13 +17,13 @@ urls.repository = ""
 [dependency-groups]
 dev = [
   "debugpy>=1.8.14",
-  "mypy>=1.16.1",
-  "pre-commit>=4.2",
+  "prek>=0.2.11",
   "py-spy>=0.4.1",
   "pytest>=8.4.1",
   "pytest-cov>=7",
   "pytest-profiling>=1.8.1",
   "ruff>=0.12",
+  "ty>=0.0.2",
   "types-python-dateutil>=2.9.0.20250708",
   "types-requests>=2.32.4.20250611",
 ]
@@ -55,12 +55,6 @@ addopts = "--cov=<project_package_name>"
 
 [tool.coverage.run]
 omit = [ 'test' ]
-
-[tool.mypy]
-python_version = "3.13"
-show_traceback = true
-disable_error_code = "import-untyped"
-# plugins = [ "sqlalchemy.ext.mypy.plugin" ]
 
 [tool.uv]
 required-environments = [
